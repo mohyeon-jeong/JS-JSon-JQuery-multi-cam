@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<button type="button" onclick="func()">call func</button>
+	<script type="text/javascript">
+		function func() {
+			console.log('called func()');
+		}
+
+		let num1 = 10;
+		let num2 = 3;
+
+		function multi(n1, n2) {
+
+		}
+	</script>
+	<br>
+	<br>
+	<button type="button" onclick="btnclick('one')">button one</button>
+	<button type="button" onclick="btnclick('two')">button two</button>
+	<button type="button" onclick="btnclick('three')">button three</button>
+
+	<script type="text/javascript">
+		function btnclick(n) {
+			if (n == "one") {
+				console.log("clicked button one");
+			} else if (n == "two") {
+				console.log("clicked button two");
+			} else if (n == "three") {
+				console.log("clicked button three");
+			}
+		}
+	</script>
+</body>
+</html>

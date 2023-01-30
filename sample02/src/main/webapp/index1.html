@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p id="demo"></p>
+	<br>
+	<script type="text/javascript">
+		function displayDate() {
+			document.getElementById("demo").innerHTML = Date();
+		}
+		
+		// displayDate();
+		setInterval("displayDate()", 1000);
+	</script>
+	<br>
+	<br>
+	<h3 id="date"></h3>
+	<script type="text/javascript">
+		let d = new Date();
+		// set time
+//		d = new Date(2023, 2 - 1, 28, 12, 36, 0, 0); // setter
+//		d = new Date("October 12, 2023 14:45:12");
+		document.getElementById("date").innerHTML = d;
+		document.getElementById("date").innerHTML = d.getFullYear();
+		document.getElementById("date").innerHTML = d.getMonth() + 1; // 0 ~ 11, +1
+		document.getElementById("date").innerHTML = d.getDate();
+		document.getElementById("date").innerHTML = d.getDay(); // Sun ~ Sat, 0 ~ 6.
+		document.getElementById("date").innerHTML = d.getHours();
+		document.getElementById("date").innerHTML = d.getMinutes();
+	</script>
+</body>
+</html>

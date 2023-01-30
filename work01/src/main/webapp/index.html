@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>변수의 연산</h3>
+	<p>a, b에 대해서 변수 a와 b의 계산 결과를 표시합니다.</p>
+	<button type="button" onclick="calculate('+')">덧셈</button>
+	<button type="button" onclick="calculate('-')">뺄셈</button>
+	<button type="button" onclick="calculate('*')">곱셈</button>
+	<button type="button" onclick="calculate('/')">나눗셈</button>
+	<button type="button" onclick="calculate('%')">나머지</button>
+	<br>
+	<br>
+	<input type="text" id="firstValue" size="10">
+	<input type="text" id="operator" size="5">
+	<input type="text" id="secondValue" size="10"> =
+	<input type="text" id="result" size="10">
+	<script type="text/javascript">
+		function calculate(oper) {
+			if (oper == "+") {
+				document.getElementById("operator").value = oper;
+				let result = parseInt(document.getElementById("firstValue").value)
+						+ parseInt(document.getElementById("secondValue").value);
+				document.getElementById("result").value = result;
+			} else if (oper == "-") {
+				document.getElementById("operator").value = oper;
+				let result = document.getElementById("firstValue").value
+						- document.getElementById("secondValue").value;
+				document.getElementById("result").value = result;
+			} else if (oper == "*") {
+				document.getElementById("operator").value = oper;
+				let result = document.getElementById("firstValue").value
+						* document.getElementById("secondValue").value;
+				document.getElementById("result").value = result;
+			} else if (oper == "/") {
+				document.getElementById("operator").value = oper;
+				let result = document.getElementById("firstValue").value
+						/ document.getElementById("secondValue").value;
+				document.getElementById("result").value = result;
+			} else if (oper == "%") {
+				document.getElementById("operator").value = oper;
+				let result = document.getElementById("firstValue").value
+						% document.getElementById("secondValue").value;
+				document.getElementById("result").value = result;
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script type="text/javascript">
+		v = 123;
+		var v; // 이렇게 선언해도 동작하므로 var는 위험함
+		// alert(v);
+		let l; // let은 안됨
+		l = 1234;
+		// alert(l);
+
+		// variables
+		let number = 123;
+		let pi = 3.141592;
+		let name = 'hong';
+		let answer = true;
+
+		// array
+		let cars = [ "benz", "bmw", 'saab' ];
+		console.log(cars[1]);
+
+		let arrNum = new Array();
+		arrNum[0] = 11;
+		arrNum[1] = 22;
+		arrNum[2] = 33;
+		arrNum[3] = 44;
+		
+		// for
+		for (var i = 0; i < arrNum.length; i++) {
+			console.log(arrNum[i]);
+		}
+		
+		// for each
+		for (i in cars) {
+			console.log(cars[i]);
+		}
+		
+		// lambda
+		cars.forEach(element=>console.log(element));
+		
+		// key:value -> json(HashMap)
+		let myobj = {
+				firstname:"gildong",
+				lastname:"hong",
+				age:24,
+				print:function(){
+					console.log('called print()');
+				}
+		}
+		
+		console.log(myobj.firstname);
+		console.log(myobj.age);
+		
+		myobj.print();
+	</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	Decimal to String, String to Integer(Dec)
+	<br>
+	<br>
+	input : <input type="text" id="num" size="20">
+	<button type="button" onclick="cast()">Cast</button>
+	<br>
+	<br>
+	result : <input type="text" id="result">
+	<script type="text/javascript">
+		function cast() {
+			let strNum = document.getElementById("num").value;
+			
+			// String to Integer
+			let num = parseInt(strNum);
+			num *= 10;
+			document.getElementById("result").value = num;
+			
+			// Integer to String
+//			let numStr = num + ""; - works
+			let numStr = num.toString();
+			alert(numStr + 12);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+	JavaScript(front-end) == Client(Web) 처리 언어
+	목적 :	web resource에 접근하고 처리하기 위한 스크립트
+			tag들을 접근해서 데이터를 취득, 수정, 검색
+			컴파일 X -> 빠름, 가벼움
+			
+	<p id="pid">a</p>
+	<h2 class="hcls">b</h2>
+	<p class="hcls">c</p>
+	<input type="text" name="food">
+	
+	id : JS에서 접근하기 위해 주로 사용. 1개만 적용
+	class : CSS를 적용하는 경우 사용. 여러 개
+	name : 값을 넘겨줄 경우 사용. 여러 개
+ -->
+</head>
+<body>
+	<p id="demo">Hello JS</p>
+	<script type="text/javascript">
+		// JS 영역
+		console.log("JS was executed");
+		// alert("executing JS");
+		var demo = document.getElementById("demo").innerHTML; // getter
+		alert(demo);
+		document.getElementById("demo").innerHTML = "hi JS";
+	</script>
+</body>
+</html>

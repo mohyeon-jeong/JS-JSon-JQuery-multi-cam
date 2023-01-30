@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p id="pid">p tag</p>
+	<br>
+	<p class="cls">p tag class</p>
+	<h3 class="cls">h3 tag class</h3>
+	<br>
+	<input type="text" name="name" value="hello">
+	<br>
+	<input type="text" name="name" value="world">
+	<button type="button" onclick="btnClick()">button</button>
+	<script type="text/javascript">
+		function btnClick() {
+			document.getElementById("pid").innerHTML = "print p tag value";
+//			document.getElementsByClassName("cls")[0].innerHTML = "input value in class";
+			//								getElements~ 들은 배열로 넘어옴
+			let arrClass = document.getElementsByClassName("cls");
+			for (i = 0; i < arrClass.length; i++) {
+				console.log(arrClass[i]);
+			}
+			
+			// name
+			document.getElementsByName("name")[0].value = "hihi";
+			 
+			document.getElementsByTagName("p")[0].innerHTML = "i can do it";
+		}
+	</script>
+	<br>
+	<br>
+	<div id="demo" style="background-color: #ffffff">Hello JavaScript CSS</div>
+	<button type="button" onclick="proc()">Apply</button>
+	<script type="text/javascript">
+		function proc() {
+			let obj = document.getElementById("demo");
+			obj.style.color = "white";
+			obj.style.backgroundColor = "blue";
+			obj.style.textAlign = "center";
+			obj.style.borderStyle = "double";
+			obj.style.fontFamily = "MS PGothic";
+			obj.style.fontSize = "24pt";
+		}
+	</script>
+</body>
+</html>
