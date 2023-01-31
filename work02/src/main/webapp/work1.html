@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Work 1</title>
+<style type="text/css">
+#plink {
+	width: 500px;
+	color: orange;
+	font-style: oblique;
+	float: left;
+}
+
+#pname {
+	font-style: oblique;
+	color: gray;
+}
+</style>
+</head>
+<body>
+	<h1>미술관 및 박물관 링크</h1>
+	<select id="sel" onchange="link()" style="margin-bottom: 200px">
+		<option value="none">대상을 선택</option>
+		<option value="none">미술관-------------</option>
+		<option value="semaseoul">서울 시립 미술관</option>
+		<option value="mmca">국립 현대 미술관</option>
+		<option value="sac">예술의 전당</option>
+		<option value="none">박물관-------------</option>
+		<option value="museum">국립 중앙 박물관</option>
+		<option value="seoulmuse">서울 역사 박물관</option>
+		<option value="nfm">국립 민속 박물관</option>
+	</select>
+	<br>
+	<a id="plink" href=""></a>
+	<li id="pname"></li>
+	<script type="text/javascript">
+		function link() {
+			let value = document.getElementById("sel").value;
+			if (value == "none") {
+				document.getElementById("plink").innerHTML = "";
+				document.getElementById("plink").href = "";
+				document.getElementById("pname").innerHTML = "";
+			} else if (value == "semaseoul") {
+				document.getElementById("plink").innerHTML = "http://sema.seoul.go.kr/";
+				document.getElementById("plink").href = "http://sema.seoul.go.kr";
+				document.getElementById("pname").innerHTML = "서울시립미술관";
+			} else if (value == "mmca") {
+				document.getElementById("plink").innerHTML = "http://www.mmca.go.kr/";
+				document.getElementById("plink").href = "http://www.mmca.go.kr/";
+				document.getElementById("pname").innerHTML = "국립현대미술관";
+			} else if (value == "sac") {
+				document.getElementById("plink").innerHTML = "http://www.sac.or.kr/";
+				document.getElementById("plink").href = "http://www.sac.or.kr/";
+				document.getElementById("pname").innerHTML = "예술의전당";
+			} else if (value == "museum") {
+				document.getElementById("plink").innerHTML = "http://www.museum.go.kr";
+				document.getElementById("plink").href = "http://www.museum.go.kr";
+				document.getElementById("pname").innerHTML = "국립중앙박물관";
+			} else if (value == "seoulmuse") {
+				document.getElementById("plink").innerHTML = "http://www.museum.seoul.kr/";
+				document.getElementById("plink").href = "http://www.museum.seoul.kr/";
+				document.getElementById("pname").innerHTML = "서울역사박물관";
+			} else if (value == "nfm") {
+				document.getElementById("plink").innerHTML = "http://www.nfm.go.kr/";
+				document.getElementById("plink").href = "http://www.nfm.go.kr/";
+				document.getElementById("pname").innerHTML = "국립민속박물관";
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- form -->
+	<form action="NewFile.jsp">
+		name : <input type="text" name="name">
+		<br>
+		age : <input type="text" name="age">
+		<br>
+		<input type="submit" value="go">
+	</form>
+	
+	<!-- a -->
+	<br>
+	<a href="NewFile.jsp?name=seong&age=16">move to NewFile.jsp</a>
+	
+	<!-- JS -->
+	<br>
+	<br>
+	name : <input type="text" id="name">
+	<br>
+	age : <input type="text" id="age">
+	<br>
+	<button type="button" onclick="move()">move</button>
+	<script type="text/javascript">
+		function move() {
+			let name = document.getElementById("name").value;
+			let age = document.getElementById("age").value;
+			
+			if (name.trim() == "") {
+				alert("you must input your name");
+				return;
+			}
+			
+			if (name.trim().length < 2) {
+				alert("wrong name. min : 2");
+				return;
+			}
+			
+			location.href = "NewFile.jsp?name=" + name + "&age=" + age;
+		}
+	</script>
+</body>
+</html>

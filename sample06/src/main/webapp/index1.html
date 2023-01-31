@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1" id="mytable">
+		<col width="50">
+		<col width="100">
+		<col width="80">
+		<tr>
+			<th>num</th>
+			<th>name</th>
+			<th>age</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>hong</td>
+			<td>24</td>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		let table = document.getElementById("mytable");
+
+		// tr
+		let tr = document.createElement("tr"); // == <tr></tr>
+
+		// td
+		let td1 = document.createElement("td"); // == <td></td>
+		td1.appendChild(document.createTextNode("2")); // == <td>2</td>
+
+		// td
+		let td2 = document.createElement("td");
+		td2.appendChild(document.createTextNode("seong"));
+
+		// td
+		let td3 = document.createElement("td");
+		td3.appendChild(document.createTextNode("16"));
+		
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		tr.appendChild(td3);
+		
+		table.appendChild(tr);
+	</script>
+</body>
+</html>

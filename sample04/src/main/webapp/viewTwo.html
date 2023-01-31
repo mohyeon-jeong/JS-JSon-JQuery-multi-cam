@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body bgcolor="green">
+	<h1>View Two</h1>
+	<input type="button" value="back" onclick="back()">
+	<input type="button" value="refresh" onclick="reload()">
+	<input type="button" value="go" onclick="forward()">
+	<input type="button" value="move to view three" onclick="gopage()">
+	<script type="text/javascript">
+		function back() {
+			history.back();
+		}
+		function reload() {
+			location.reload();
+		}
+		function forward() {
+			history.forward();
+		}
+		function gopage() {
+			location.href = "viewThree.html";
+		}
+	</script>
+</body>
+</html>
