@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+	<book>
+		<title>bocchitherock</title>
+		<author>hamaji</author>
+		<date>2023/01/20</date>
+		<price>10000</price>
+	</book>
+	<book>
+		<title>kimetsunoyaiba</title>
+		<author>kotogae</author>
+		<date>2023/01/25</date>
+		<price>12000</price>
+	</book>
+	<book>
+		<title>kisekoi</title>
+		<author>fukuda</author>
+		<date>2023/01/22</date>
+		<price>13000</price>
+	</book>
+</books>

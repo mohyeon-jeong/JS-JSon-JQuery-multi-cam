@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clients>
+	<client>
+		<num>1</num>
+		<name>hong</name>
+		<address>Seoul</address>
+		<lastdate>2021/09/17</lastdate>
+	</client>
+	<client>
+		<num>2</num>
+		<name>seong</name>
+		<address>Icheon</address>
+		<lastdate>2022/10/17</lastdate>
+	</client>
+	<client>
+		<num>3</num>
+		<name>il</name>
+		<address>Daejeon</address>
+		<lastdate>2020/04/11</lastdate>
+	</client>
+</clients>

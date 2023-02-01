@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="demo" border="1"></table>
+	<script type="text/javascript">
+		let xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				books(xhttp);
+			}
+		}
+		xhttp.open("GET", "book.xml", true);
+		xhttp.send();
+		function books(xml) {
+			let xmlDoc, arr, title, author, date, price;
+			let titleTxt, authorTxt, dateTxt, priceTxt;
+
+			titleTxt = authorTxt = dateTxt = priceTxt = "";
+
+			xmlDoc = xml.responseXML;
+
+			// get root name - books
+			let rootTagName = xmlDoc.documentElement.nodeName;
+
+			// get node name
+			let nodeArr = xmlDoc.documentElement.childNodes;
+
+			// check node list
+			let nodeName;
+			for (var i = 0; i < nodeArr.length; i++) {
+				if (nodeArr[i].nodeType == 1) { // get rid of #text
+					nodeName = nodeArr[i].nodeName;
+				}
+			}
+
+			// ready table
+			let table = "<table>";
+			table += "<col width='50'><col width='100'><col width='140'><col width='100'><col width='140'>";
+			table += "<tr>";
+			table += "<th>num</th>";
+			// get col name
+			columnName = xmlDoc.getElementsByTagName(nodeName)[0];
+			let child = columnName.firstChild;
+			
+			for (var i = 0; i < columnName.childNodes.length; i++) {
+				if (child.nodeType == 1) {
+					table += "<th>" + child.nodeName + "</th>";
+				}
+				child = child.nextSibling; // index++
+			}
+			
+			table += "</tr>";
+			
+			// print data
+			let len = xmlDoc.getElementsByTagName(nodeName).length;
+			
+			for (var i = 0; i < len; i++) {
+				table += "<tr>";
+				table += "<th>" + (1 + i) + "</th>";
+				let dataArr = xmlDoc.getElementsByTagName(nodeName)[i];
+				child = dataArr.firstChild;
+				for (var j = 0; j < dataArr.childNodes.length; j++) {
+					if (child.nodeType == 1) {
+						table += "<td>" + child.childNodes[0].nodeValue + "</td>";
+					}
+					child = child.nextSibling;
+				}
+				table += "</tr>";
+			}
+			
+			table += "</table>";
+			
+			document.getElementById("demo").innerHTML = table;
+		}
+	</script>
+</body>
+</html>

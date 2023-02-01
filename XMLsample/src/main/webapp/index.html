@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p id="demo"></p>
+	<script type="text/javascript">
+		let xmltext = "<books>" +
+						"<book>" +
+							"<title>tmd</title>" +
+							"<author>man</author>" +
+							"<year>2001</year>" +
+						"</book>" +
+						"<book>" +
+							"<title>aesop</title>" +
+							"<author>woman</author>" +
+							"<year>2004</year>" +
+						"</book>" +
+					"</books>";
+		let parser, xmlDoc;
+		
+		parser = new DOMParser();
+		xmlDoc = parser.parseFromString(xmltext, "text/html");
+		// alert(xmlDoc);
+		document.getElementById("demo").innerHTML
+		// = xmlDoc.getElementsByTagName("book")[1].childNodes[0].nodeName; // title
+		// = xmlDoc.getElementsByTagName("book")[1].childNodes[0].childNodes[0].nodeValue; // aesop
+				
+	</script>
+</body>
+</html>
