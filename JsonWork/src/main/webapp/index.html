@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table id="demo" border="1"></table>
+	<script type="text/javascript">
+		let xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				movieFunc(this);
+			}
+		}
+		xhttp.open("GET", "movie.json", true);
+		xhttp.send();
+
+		function movieFunc(resp) {
+			let jsonDoc = resp.responseText;
+			let json = JSON.parse(jsonDoc);
+
+			let table = "<table>";
+			table += "<col width='50'><col width='140'><col width='80'><col width='100'><col width='70'>";
+			table += "<tr>";
+			table += "<th>num</th>";
+			for (key in json[0]) {
+				table += "<th>" + key + "</th>";
+			}
+			table += "</tr>";
+
+			// datas
+			for (var i = 0; i < json.length; i++) {
+				table += "<tr>";
+				table += "<th>" + (1 + i) + "</th>";
+				/* table += "<td>" + json[0].title + "</td>";
+				table += "<td>" + json[0].score + "</td>";
+				table += "<td>" + json[0].openday + "</td>";
+				table += "<td>" + json[0].director + "</td>"; */
+				for (key in json[i]) {
+					table += "<td>" + json[i][key] + "</td>";
+				}
+				table += "</tr>";
+			}
+			table += "</table>";
+
+			document.getElementById("demo").innerHTML = table;
+		}
+	</script>
+</body>
+</html>

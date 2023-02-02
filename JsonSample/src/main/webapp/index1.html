@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<p id="demo"></p>
+	<script type="text/javascript">
+		let xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				jsonFunc(this.responseText);
+			}
+		}
+		xhttp.open("GET", "jsonfile.json", true);
+		xhttp.send();
+
+		let txt = "";
+		function jsonFunc(resp) {
+			let json = JSON.parse(resp);
+			for (var i = 0; i < json.length; i++) {
+				txt += json[i].name + " " + json[i].age + " " + json[i].address
+						+ " " + json[i].height + "<br>";
+			}
+			document.getElementById("demo").innerHTML = txt;
+		}
+	</script>
+</body>
+</html>

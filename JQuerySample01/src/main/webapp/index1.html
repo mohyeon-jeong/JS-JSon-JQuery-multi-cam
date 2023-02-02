@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="./jquery.min.js"></script>
+</head>
+<body>
+	input : <input type="text" id="text">
+	<br>
+	<input type="button" id="btn" value="input">
+	<script type="text/javascript">
+		$("#btn").click(function() {
+			// getter
+			let text = $("#text").val(); // .val() == .value
+			alert(text);
+			
+			// setter
+			$("#text").val("guitar, loneliness and blue planet");
+		})
+	</script>
+</body>
+</html>

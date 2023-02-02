@@ -1,0 +1,20 @@
+[
+	{
+		"title":"Interstellar",	
+		"score":4.5,
+		"openday":"14/11/06",
+		"director":"Christopher Nolan"
+	},
+	{
+		"title":"asdf",	
+		"score":4.7,
+		"openday":"21/12/01",
+		"director":"asdfasdf"
+	},
+	{
+		"title":"zxcv",	
+		"score":4.2,
+		"openday":"22/08/11",
+		"director":"zxcvzxcv"
+	}
+]

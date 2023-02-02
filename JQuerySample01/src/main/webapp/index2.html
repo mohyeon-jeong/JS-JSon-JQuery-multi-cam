@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="./jquery.min.js"></script>
+</head>
+<body>
+	<p>out p tag</p>
+	<div>
+		<p>under div p tag</p>
+		<p id="demo">under div and id demo p tag</p>
+		<p class="cls">under div and class cls p</p>
+		<h3 class="cls">under div and class cls h3</h3>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/* $("p").click(function() {
+				alert("p tag clicked");
+			});
+			
+			$("div p").click(function() {
+				alert("div p tag clicked");
+			});
+			
+			$("div .cls").click(function() {
+				alert("div .cls tag clicked");
+			});
+			
+			$("div p.cls").click(function() {
+				alert("div p.cls tag clicked");
+			}); */
+			
+			$("p").click(function() {
+				// $("#demo").css("background", "#ff0000"); // (K, V)
+				// $(this).css("background", "#424242");
+				$(this).hide();
+			});
+			
+			$("h3").click(function() {
+				$("p").show();
+			})
+		})
+	</script>
+</body>
+</html>
