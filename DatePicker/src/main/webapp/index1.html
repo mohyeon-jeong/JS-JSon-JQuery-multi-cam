@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+</head>
+<body>
+	<input type="text" id="date" placeholder="YYYY/MM/DD">
+	<br>
+	<br>
+	Year : <span id="year"></span>
+	<br>
+	Month : <span id="month"></span>
+	<br>
+	Day : <span id="day"></span>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			let week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+			$("#date").datepicker({
+				dateFormat: "yy/mm/dd",
+				dayNamesMin: week,
+				monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				onSelect: function(d) {
+// 					alert(d);
+					let date = d.split("/");
+					$("#year").html(date[0]);
+					$("#month").html(date[1]);
+					$("#day").html(date[2]);
+				}
+			});
+		})
+	</script>
+</body>
+</html>

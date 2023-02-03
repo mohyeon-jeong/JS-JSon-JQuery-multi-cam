@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<h1>Pictures</h1>
+	<img id="first" src="./images/img01.jpg">
+	<img id="second" src="./images/img02.jpg">
+	<img id="third" src="./images/img03.jpg">
+	<img id="fourth" src="./images/img04.jpg">
+	<ol>
+		<li id="li1">성 자비에르 성당(외관)</li>
+		<li id="li2">성 자비에르 성당(내관)</li>
+		<li id="li3">낡은 건물</li>
+		<li id="li4">가로등</li>
+	</ol>
+	<script type="text/javascript">
+		$("li").hide();
+		$("#first").click(function() {
+			alert($("#li1").html());
+			$("#li1").show();
+		});
+		$("#second").click(function() {
+			alert($("#li2").html());
+			$("#li2").show();
+		});
+		$("#third").click(function() {
+			alert($("#li3").html());
+			$("#li3").show();
+		});
+		$("#fourth").click(function() {
+			alert($("#li4").html());
+			$("#li4").show();
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<div id="demo">
+		<button type="button">button</button>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("button").click(function() {
+					// add as String
+					// let str = "<p id='pid'>added p tag</p>";
+					// $("#demo").append(str);
+					
+					// add as JS
+// 					let jsStr = document.createElement("h3");
+// 					jsStr.setAttribute("id", "h3id");
+// 					jsStr.innerHTML = "added h3 tag";
+// 					$("#demo").append(jsStr);
+					
+					// add as JQuery
+					let jqStr = $("<span></span>").text("added span tag");
+					jqStr.attr("id", "spanid");
+					$("#demo").append(jqStr);
+				})
+			});
+		</script>
+	</div>
+</body>
+</html>

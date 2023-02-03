@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<!-- radio -->
+	<ul>
+		<li><input type="radio" name="radioTest" value="banana">banana</li>
+		<li><input type="radio" name="radioTest" value="apple">apple</li>
+		<li><input type="radio" name="radioTest" value="pear">pear</li>
+	</ul>
+	<button type="button" id="btn">choice</button>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btn").click(function() {
+				$("input[name='radioTest']").val(["pear"]);
+			})
+		})
+	</script>
+	<br>
+	<br>
+	
+	<!-- checkbox -->
+	<input type="checkbox" id="ch1" name="ch">painting
+	<input type="checkbox" id="ch2" name="ch">listening
+	<br>
+	<button type="button" id="cbtn">check</button>
+	<script type="text/javascript">
+		$("#cbtn").click(function() {
+			// getter
+			// let check = $("#ch1").is(":checked");
+			// alert(check);
+			
+			// let check = $("input:checkbox[id='ch2']").is(":checked");
+			// alert(check);
+			
+			// setter
+			// $("#ch1").attr("checked", "checked");
+			// $("#ch1").prop("checked", false);
+		});
+	</script>
+	<br>
+	<br>
+	<select id="food">
+		<option value="hamburger">hamburger</option>
+		<option value="pizza" selected="selected">pizza</option>
+		<option value="chicken">chicken</option>
+	</select>
+	<p id="demo">p demo</p>
+	<button type="button" id="sbtn">select</button>
+	<button type="button" id="append">add at first, append</button>
+	<button type="button" id="prepend">add at last, prepend</button>
+	<script type="text/javascript">
+		$("#food").change(function() {
+			let val = $(this).val();
+			$("#demo").html(val);
+		});
+		
+		$("#sbtn").click(function() {
+			// alert($("#food").val());
+			$("#food").empty();
+		});
+		
+		$("#append").click(function() {
+			// $("#demo").append("<h3>added h3 tag(append)</h3>");
+			$("#food").append("<option value='steak'>steak</option>");
+		});
+		
+		$("#prepend").click(function() {
+			// $("#demo").prepend("<h3>added h3 tag(prepend)</h3>");
+			$("#food").prepend("<option value='ricecake'>rice cake</option>");
+		});
+	</script>
+	
+	<table border="1" id="table">
+		<col width="50"><col width="150"><col width="100">
+		<tr>
+			<th>num</th>
+			<th>title</th>
+			<th>writer</th>
+		</tr>
+	</table>
+	<script type="text/javascript">
+		$("#table").append(
+					$("<tr>").append(
+							$("<th>").append(1),
+							$("<th>").append("today is friday"),
+							$("<th>").append("Skin"))
+					);
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<style type="text/css">
+#first {
+	border: solid;
+	border-color: green;
+}
+</style>
+</head>
+<body>
+	<h3>Photo Library</h3>
+	<img id="first" src="./images/p01.jpg">
+	<br>
+	<h3>Life on the water</h3>
+	<img id="second" src="./images/photo1.jpg">
+	<img id="third" src="./images/photo2.jpg">
+	<br>
+	<h3>Room Image</h3>
+	<img id="fourth" src="./images/b_pic2.jpg">
+	<script type="text/javascript">
+		$("#second").click(function() {
+			$("#second").css({"border":"solid", "border-color":"red"});
+		});
+		
+		$("#third").click(function() {
+			$("#third").css({"border":"solid", "border-color":"red"});
+		});
+		
+		$("#fourth").mouseover(function() {
+			$("#fourth").attr("src", "./images/b_pic1.jpg");
+		});
+		
+		$("#fourth").mouseout(function() {
+			$("#fourth").attr("src", "./images/b_pic2.jpg");
+		});
+	</script>
+</body>
+</html>

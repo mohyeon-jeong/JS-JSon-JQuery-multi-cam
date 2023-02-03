@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<!-- send data
+		<a href="">
+		<form action="">
+		location.href=""
+	 -->
+	<a href="NewFile.jsp">go to NewFile.jsp</a>
+	<br>
+	<br> name :
+	<input type="text" id="name">
+	<br> age :
+	<input type="text" id="age">
+	<br> address :
+	<input type="text" id="address">
+	<br>
+	<button type="button" id="send">button</button>
+	<script type="text/javascript">
+		$(document).ready(
+				function() {
+					$("#send")
+							.click(
+									function() {
+										let name = $("#name").val();
+										let age = $("#age").val();
+										let address = $("#address").val();
+										location.href = "NewFile.jsp?name="
+												+ name + "&age=" + age
+												+ "&address=" + address;
+									})
+				})
+	</script>
+	<br>
+	<br>
+	<br>
+	<form id="frm">
+		name : <input type="text" name="name">
+		<br>
+		age : <input type="text" name="age">
+		<br>
+		address : <input type="text" name="address">
+		<br>
+		<button type="button" id="btn">send</button>
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#btn").click(function() {
+				$("#frm").attr("action", "NewFile.jsp").submit();
+			})
+		})
+	</script>
+</body>
+</html>
