@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+	<form action="hello" id="frm">
+		<h3>hobby</h3>
+		<input type="checkbox" name="hobby" value="painting">painting
+		<input type="checkbox" name="hobby" value="game">playing games
+		<input type="checkbox" name="hobby" value="movie">watching movies
+		<br>
+		<h3>favorite site</h3>
+		<select name="url" multiple="multiple">
+			<option value="naver">naver</option>
+			<option value="google">google</option>
+			<option value="zum">zum</option>
+		</select>
+		<button type="button">send</button>
+	</form>
+	<script type="text/javascript">
+		$("button").click(function() {
+			$("#frm").submit();
+		});
+	</script>
+</body>
+</html>
