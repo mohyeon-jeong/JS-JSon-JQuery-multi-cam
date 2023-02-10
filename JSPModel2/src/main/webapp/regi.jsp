@@ -20,11 +20,10 @@
 <body>
 
 <h2>회원가입</h2>
-<p>환영합니다</p>
 
 <div class="center">
 
-<form action="regiAf.jsp" method="post">
+<form action="member?param=regiAf" method="post">
 
 <table border="1">
 <tr>
@@ -72,13 +71,13 @@ $(document).ready(function() {
 		
 		$.ajax({
 			type:"post",
-			url:"idcheck.jsp",
+			url:"member?param=idcheck",
 			data:{ "id":$("#id").val() },
 			success:function(msg){
 				// alert('success');
-				// alert(msg.trim());
+				// alert(JSON.stringify(msg));
 				
-				if(msg.trim() == "YES"){
+				if(msg.str == "YES"){
 					$("#idcheck").css("color", "#0000ff");
 					$("#idcheck").text("사용할 수 있는 아이디입니다");
 				}else{

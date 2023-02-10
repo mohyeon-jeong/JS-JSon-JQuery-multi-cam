@@ -1,3 +1,4 @@
+
 drop table member;
 
 create table member(
@@ -8,12 +9,13 @@ create table member(
 	auth int
 );
 
-select id
+select id 
 from member
-where id='asdf';
+where id='abc';
 
 select count(*)
 from member
-where id='asdf';
+where id='abc';
 
 select * from member;
+

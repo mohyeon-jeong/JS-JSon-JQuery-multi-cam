@@ -45,7 +45,7 @@
 <tr>
 	<td colspan="2">
 		<input type="submit" value="log-in">
-		<a href="regi.jsp">회원가입</a>
+		<a href="member?param=regi">회원가입</a>
 	</td>
 </tr>
 </table>
