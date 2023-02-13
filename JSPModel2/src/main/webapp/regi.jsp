@@ -20,6 +20,7 @@
 <body>
 
 <h2>회원가입</h2>
+<p>환영합니다</p>
 
 <div class="center">
 

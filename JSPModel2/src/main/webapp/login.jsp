@@ -26,7 +26,8 @@
 
 <div class="center">
 
-<form action="loginAf.jsp" method="post">
+<form action="member" method="post">
+<input type="hidden" name="param" value="loginAf">
 
 <table border="1">
 <tr>
