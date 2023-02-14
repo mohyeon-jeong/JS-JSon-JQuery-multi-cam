@@ -5,6 +5,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%!
+// 답글 화살표 함수
+public String arrow(int depth) {
+	String img = "<img src='./images/arrow.png' width='20px' height='20px' />";
+	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
+	String ts = "";
+	
+	for (int i = 0; i < depth; i++) {
+		ts += nbsp;
+	}
+	
+	return depth == 0?"":ts + img;
+}
+%>
+    
 <%
 	MemberDto login = (MemberDto)session.getAttribute("login");
 	if(login == null){
@@ -90,8 +105,12 @@ if(list == null || list.size() == 0){
 		%>
 		<tr>
 			<th><%=i + 1 %></th>
-			<td><%=dto.getTitle() %></td>
-			<td><%=dto.getReadcount() %></td>
+			<td>
+				<%=arrow(dto.getDepth()) %>
+				<a href="bbsdetail.jsp?seq=<%=dto.getSeq() %>"><%=dto.getTitle() %></a>
+			</td>
+<%-- 			<td><%=dto.getReadcount() %></td> --%>
+			<td><%=dto.getRef() %>-<%=dto.getStep() %>-<%=dto.getDepth() %></td>
 			<td><%=dto.getId() %></td>
 		</tr>
 		<%

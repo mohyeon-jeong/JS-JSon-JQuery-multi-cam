@@ -32,11 +32,20 @@ from bbs
 order by ref desc, step asc) a
 where rnum between 1 and 10;
 
+update bbs
+set step=step+1
+where ref=(select ref from bbs where seq=?)
+	and step>(select step from bbs where seq=?);
+	
+insert into bbs(seq, id, ref, step, depth, title, content, wdate, del, readcount)
+values(?, 
+		(select ref from bbs where seq=?),
+		(select step from bbs where seq=?) + 1,
+		(select ref from bbs where seq=?) + 1,
+		?, ?, now(), 0, 0);
 
-
-
-
-
+delete from bbs
+where seq=39;
 
 
 

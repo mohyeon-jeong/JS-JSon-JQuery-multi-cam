@@ -28,8 +28,8 @@ public class BbsDao {
 
 	public List<BbsDto> getBbsList() {
 
-		String sql = " select seq, id, ref, step, depth," + "			  title, content, wdate, del, readcount "
-				+ "    from bbs " + "    order by ref desc, step asc ";
+		String sql = " select seq, id, ref, step, depth," + " title, content, wdate, del, readcount "
+				+ "    from bbs " + " order by ref desc, step asc ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -68,7 +68,8 @@ public class BbsDao {
 
 	public List<BbsDto> getBbsSearchList(String choice, String search) {
 
-		String sql = " select seq, id, ref, step, depth," + "			  title, content, wdate, del, readcount "
+		String sql = " select seq, id, ref, step, depth," 
+				+ "    title, content, wdate, del, readcount "
 				+ "    from bbs ";
 
 		String searchSql = "";
@@ -255,5 +256,139 @@ public class BbsDao {
 
 		return list;
 	}
+	
+	public BbsDto getBbs(int seq) {
+		String sql = " select * "
+				+ " from bbs "
+				+ " where seq=" + seq;
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		BbsDto dto = null;
+		
+		conn = DBConnection.getConnection();
+		System.out.println("1/3 getBbs success");
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			System.out.println("2/3 getBbs success");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/3 getBbs success");
+			
+			if (rs.next()) {
+				dto = new BbsDto(rs.getInt(1),
+								rs.getString(2),
+								rs.getInt(3),
+								rs.getInt(4),
+								rs.getInt(5),
+								rs.getString(6),
+								rs.getString(7),
+								rs.getString(8),
+								rs.getInt(9),
+								rs.getInt(10));
+			}
+		} catch (SQLException e) {
+			System.out.println("getBbs failed");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, rs);
+		}
+		
+		return dto;
+	}
+	
+	public boolean answer(int seq, BbsDto dto) {
+		// update
+		String sql1 = " update bbs "
+				+ " set step=step+1 "
+				+ " where ref=(select ref from (select ref from bbs a where seq=?) A) " // MySQL은 alias 넣어줘야 한다고 함
+				+ "	and step>(select step from (select step from bbs b where seq=?) B); ";
+		
+		// insert
+		String sql2 = " insert into bbs(id, ref, step, depth, title, content, wdate, del, readcount) "
+				+ " values(?, "
+				+ "		(select ref from bbs a where seq=?), "
+				+ "		(select step from bbs b where seq=?) + 1, "
+				+ "		(select depth from bbs c where seq=?) + 1, "
+				+ "		?, ?, now(), 0, 0); ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count1 = 0;
+		int count2 = 0;
+		
+		conn = DBConnection.getConnection();
+		try {
+			// disable commit(= adjust) ( <-> rollback )
+			conn.setAutoCommit(false);
+			
+			// update
+			psmt = conn.prepareStatement(sql1);
+			psmt.setInt(1, seq);
+			psmt.setInt(2, seq);
+			
+			count1 = psmt.executeUpdate();
+			
+			// psmt clear
+			psmt.clearParameters();
+			
+			// insert
+			psmt = conn.prepareStatement(sql2);
+			psmt.setString(1, dto.getId());
+			psmt.setInt(2, seq);
+			psmt.setInt(3, seq);
+			psmt.setInt(4, seq);
+			psmt.setString(5, dto.getTitle());
+			psmt.setString(6, dto.getContent());
+			
+			count2 = psmt.executeUpdate();
+			
+			conn.commit();
+			
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.setAutoCommit(true);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			DBClose.close(conn, psmt, null);
+		}
+		
+		if (count1 > 0 && count2 > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
