@@ -19,6 +19,9 @@
 <head>
 <meta charset="UTF-8">
 <title>bbs write</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -26,7 +29,7 @@
 
 <div align="center">
 
-<form action="bbs?param=bbswriteAf" method="post">
+<form action="bbs?param=bbswriteAf" id="frm" method="post">
 
 <table border="1">
 <col width="200"><col width="400">
@@ -34,33 +37,53 @@
 <tr>
 	<th>아이디</th>
 	<td>
-		<input type="text" name="id" size="50px" value="<%=login.getId() %>" readonly="readonly">
+		<%-- <input type="text" name="id" size="50px" value="<%=login.getId() %>" readonly="readonly"> --%>
+		
+		<%=login.getId() %>
+		<input type="hidden" name="id" value="<%=login.getId() %>">
 	</td>
 </tr>
 <tr>
 	<th>제목</th>
 	<td>
-		<input type="text" name="title" size="50px" placeholder="제목기입">
+		<input type="text" id="title" name="title" size="50px" placeholder="제목기입">
 	</td>
 </tr>
 <tr>
 	<th>내용</th>
 	<td>
-		<textarea rows="20" cols="50px" name="content" placeholder="내용기입"></textarea>
+		<textarea rows="20" cols="50px" id="content" name="content" placeholder="내용기입"></textarea>
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
 		<!-- <input type="submit" value="글쓰기"> -->
-		<button type="submit">글쓰기</button>
+		<button type="button">글쓰기</button>
 	</td>
 </tr>
 
 </table>
-
 </form>
-
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	$("button").click(function() {
+		
+		if($("#title").val().trim() == "" ){
+			alert("제목을 기입해 주십시오");
+			return;
+		}else if($("#content").val().trim() == "" ){
+			alert("내용을 기입해 주십시오");
+			return;
+		}else{
+			$("#frm").submit();
+		}		
+	});	
+});
+</script>
+
 
 </body>
 </html>

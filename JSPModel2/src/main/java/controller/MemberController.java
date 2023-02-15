@@ -14,7 +14,6 @@ import db.DBConnection;
 import dto.MemberDto;
 import net.sf.json.JSONObject;
 
-
 @WebServlet("/member")
 public class MemberController extends HttpServlet{
 
@@ -97,7 +96,10 @@ public class MemberController extends HttpServlet{
 				req.getSession().setAttribute("login", login);
 				
 				resp.sendRedirect("bbs?param=bbslist");
-			}			
+			}else {
+				
+				
+			}
 		}
 		
 	}
