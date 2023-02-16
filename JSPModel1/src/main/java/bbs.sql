@@ -23,30 +23,36 @@ add foreign key(id) references member(id);
 insert into bbs(id, ref, step, depth, title, content, wdate, del, readcount)
 values('id', (select ifnull(max(ref), 0)+1 from bbs b), 0, 0, 'title', 'content', now(), 0, 0));
 
-select seq, id, ref, step, depth, title, content, wdate, del, readcount
-from 
+select * from bbs;
+
+
+select rnum, seq, id, ref, step, depth, title, content, wdate, del, readcount 
+from
 (select row_number()over(order by ref desc, step asc) as rnum,
-	seq, id, ref, step, depth, title, content, wdate, del, readcount
+	seq, id, ref, step, depth, title, content, wdate, del, readcount 
 from bbs
--- search
-order by ref desc, step asc) a
+-- 검색
+order by ref desc, step asc) a 
 where rnum between 1 and 10;
+
+
 
 update bbs
 set step=step+1
 where ref=(select ref from bbs where seq=?)
-	and step>(select step from bbs where seq=?);
-	
-insert into bbs(seq, id, ref, step, depth, title, content, wdate, del, readcount)
-values(?, 
-		(select ref from bbs where seq=?),
-		(select step from bbs where seq=?) + 1,
-		(select ref from bbs where seq=?) + 1,
-		?, ?, now(), 0, 0);
+	and step>(select step from bbs where seq=?)
 
+insert into bbs(id, ref, step, depth, title, content, wdate, del, readcount)
+values(?, 
+		(select ref from bbs where seq=?), 
+		(select step from bbs where seq=?)+1,
+		(select depth from bbs where seq=?)+1,
+		?, ?, now(), 0, 0)
+		
+select * from bbs;
+		
 delete from bbs
 where seq=39;
-
 
 
 

@@ -6,19 +6,20 @@
     pageEncoding="UTF-8"%>
     
 <%!
-// 답글 화살표 함수
-public String arrow(int depth) {
-	String img = "<img src='./images/arrow.png' width='20px' height='20px' />";
+// 답글의 화살표 함수
+public String arrow(int depth){
+	String img = "<img src='./images/arrow.png' width='20px' height='20px' />";	
 	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
-	String ts = "";
 	
-	for (int i = 0; i < depth; i++) {
+	String ts = "";
+	for(int i = 0;i < depth; i++){
 		ts += nbsp;
 	}
 	
-	return depth == 0?"":ts + img;
+	return depth==0?"":ts + img;
 }
-%>
+%>    
+    
     
 <%
 	MemberDto login = (MemberDto)session.getAttribute("login");
@@ -41,24 +42,23 @@ public String arrow(int depth) {
 <body>
 
 <%
+// 검색
 String choice = request.getParameter("choice");
 String search = request.getParameter("search");
-
-if (choice == null) {
+if(choice == null){
 	choice = "";
 }
-
-if (search == null) {
+if(search == null){
 	search = "";
 }
 
 BbsDao dao = BbsDao.getInstance();
 
-// page number
+
+// 페이지 넘버
 String sPageNumber = request.getParameter("pageNumber");
 int pageNumber = 0;
-
-if (sPageNumber != null && !sPageNumber.equals("")) {
+if(sPageNumber != null && !sPageNumber.equals("")){
 	pageNumber = Integer.parseInt(sPageNumber);
 }
 
@@ -66,18 +66,24 @@ if (sPageNumber != null && !sPageNumber.equals("")) {
 // List<BbsDto> list = dao.getBbsSearchList(choice, search);
 List<BbsDto> list = dao.getBbsPageList(choice, search, pageNumber);
 
-// 글의 총 수
+// 글의 총수
 int count = dao.getAllBbs(choice, search);
 
-// 페이지 총 수
-int pageBbs = count / 10; // 10 per 1 page
-
-if ((count % 10) > 0) { // ex. 20 -> need 2 pages / 25 -> need 3 pages
-	pageBbs += 1;
+// 페이지의 총수
+int pageBbs = count / 10;		// 10개씩 총글의 수를 나눔		26 / 10 -> 2
+if((count % 10) > 0){	// 6
+	pageBbs = pageBbs + 1;		// 2 + 1	
 }
+
 %>
 
 <h1>게시판</h1>
+<br>
+
+<a href="calendar.jsp">일정관리</a>
+
+<hr>
+<br>
 
 <div align="center">
 
@@ -105,13 +111,29 @@ if(list == null || list.size() == 0){
 		%>
 		<tr>
 			<th><%=i + 1 %></th>
-			<td>
-				<%=arrow(dto.getDepth()) %>
-				<a href="bbsdetail.jsp?seq=<%=dto.getSeq() %>"><%=dto.getTitle() %></a>
-			</td>
-<%-- 			<td><%=dto.getReadcount() %></td> --%>
-			<td><%=dto.getRef() %>-<%=dto.getStep() %>-<%=dto.getDepth() %></td>
-			<td><%=dto.getId() %></td>
+			
+			<%
+			if(dto.getDel() == 0){
+				%>			
+				<td>
+					<%=arrow(dto.getDepth()) %>
+					<a href="bbsdetail.jsp?seq=<%=dto.getSeq() %>">
+						<%=dto.getTitle() %>
+					</a>
+				</td>			
+				<%
+			}else if(dto.getDel() == 1){
+				%>
+				<td>
+					<%=arrow(dto.getDepth()) %>
+					<font color="#ff0000">*** 이 글은 작성자에 의해서 삭제되었습니다 ***</font>	
+				</td>
+				<%
+			}	
+			%>
+			
+			<td><%=dto.getReadcount() %></td>
+			<td><%=dto.getId() %></td>			
 		</tr>
 		<%
 	}
@@ -120,67 +142,80 @@ if(list == null || list.size() == 0){
 
 </tbody>
 </table>
+
 <br>
+
 <%
-for (int i = 0; i < pageBbs; i++) {
-	if (pageNumber == i) { // now page
-		%>
-		<span style="font-size: 15pt;color: #0000ff;font-weight: bold;"><%=i + 1%></span>
-		<%
-	} else { // other page
-		%>
-		<a href="#none" title="<%=i + 1%>페이지" onclick="goPage(<%=i %>)"
-			style="font-size: 15pt; color: #000; font-weight: bold; text-decoration: none;">[<%=i + 1 %>]</a>
-		<%
+	for(int i = 0;i < pageBbs; i++){
+		if(pageNumber == i){	// 현재 페이지
+			%>
+			<span style="font-size: 15pt;color: #0000ff;font-weight: bold;">
+				<%=i+1 %>
+			</span>
+			<%
+		}else{					// 그밖에 다른 페이지
+			%>
+			<a href="#none" title="<%=i+1 %>페이지" onclick="goPage(<%=i %>)"
+				style="font-size: 15pt; color: #000; font-weight: bold; text-decoration: none;">
+				[<%=i+1 %>]
+			</a>			
+			<%
+		}		
 	}
-}
 %>
-<br>
-<br>
+
+<br><br>
+
 <select id="choice">
 	<option value="">검색</option>
 	<option value="title">제목</option>
 	<option value="content">내용</option>
 	<option value="writer">작성자</option>
 </select>
-<input type="text" id="search" value="<%=search%>">
+
+<input type="text" id="search" value="<%=search %>">
+
 <button type="button" onclick="searchBtn()">검색</button>
-<br>
-<br>
+
+<br><br>
 <a href="bbswrite.jsp">글쓰기</a>
 
 </div>
 
 <script type="text/javascript">
-	let search = "<%=search %>";
-	if (search != "") {
-		let obj = document.getElementById("choice");
-		obj.value = "<%=choice %>";
-		obj.setAttribute("selected", "selected");
-	}
+
+let search = "<%=search %>";
+console.log("search = " + search);
+if(search != ""){
+	let obj = document.getElementById("choice");
+	obj.value = "<%=choice %>";
+	obj.setAttribute("selected", "selected");
+}
+
+function searchBtn() {
+	let choice = document.getElementById('choice').value;
+	let search = document.getElementById('search').value;
 	
-	function searchBtn() {
-		let choice = document.getElementById("choice").value;
-		let search = document.getElementById("search").value;
-		
-// 		if (choice == "") {
-// 			alert("카테고리를 선택하십시오");
-// 			return;
-// 		}
-// 		if (search.trim() == "") {
-// 			alert("검색어를 입력하십시오");
-// 			return;
-// 		}
-		
-		location.href = "bbslist.jsp?choice=" + choice + "&search=" + search;
-	}
+	/* if(choice == ""){
+		alert("카테고리를 선택해 주십시오");
+		return;
+	} */
+	/* 
+	if(search.trim() == ""){
+		alert("검색어를 선택해 주십시오");
+		return;
+	} */
 	
-	function goPage(pageNumber) {
-		let choice = document.getElementById("choice").value;
-		let search = document.getElementById("search").value;
-		
-		location.href = "bbslist.jsp?choice=" + choice + "&search=" + search + "&pageNumber=" + pageNumber;
-	}
+	location.href = "bbslist.jsp?choice=" + choice + "&search=" + search;
+}
+
+function goPage( pageNumber ) {
+	let choice = document.getElementById('choice').value;
+	let search = document.getElementById('search').value;
+	
+	location.href = "bbslist.jsp?choice=" + choice + "&search=" + search + "&pageNumber=" + pageNumber;	
+}
+
 </script>
 
 

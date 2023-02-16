@@ -43,7 +43,7 @@ public class BbsDto implements Serializable {
 		this.del = del;
 		this.readcount = readcount;
 	}
-	
+
 	public int getSeq() {
 		return seq;
 	}
