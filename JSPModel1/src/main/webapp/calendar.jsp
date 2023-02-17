@@ -29,6 +29,13 @@ if(login == null){
 a{
 	text-decoration: none;
 }
+a:hover{
+	text-decoration: underline;
+}
+.caltable {
+  border : 1px solid #3c3c3c;
+  border-collapse : collapse;
+}
 </style>
 
 </head>
@@ -36,6 +43,8 @@ a{
 
 <h1>일정관리</h1>
 
+<hr>
+<br>
 <%
 	Calendar cal = Calendar.getInstance();
 	cal.set(Calendar.DATE, 1);	// 1일로 설정
@@ -48,8 +57,8 @@ a{
 	if(CalendarUtil.nvl(syear) == false){	// 넘어온 파라미터가 있음
 		year = Integer.parseInt(syear);
 	}	
-	int month = cal.get(Calendar.MONTH) + 1;
-	if(CalendarUtil.nvl(smonth) == false){
+	int month = cal.get(Calendar.MONTH) + 1; // 0 ~ 11까지 이므로 +1을 해 줘야한다
+	if(CalendarUtil.nvl(smonth) == false){  // 넘어온 파라미터가 있음
 		month = Integer.parseInt(smonth);
 	}
 	
@@ -70,23 +79,23 @@ a{
 	int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 	
 	// << year--
-	String pp = String.format("<a href='calendar.jsp?year=%d&month=%d'>"
-							 + "  <img src='images/left.gif' width='20px' height='20px'>"
-							+ "</a>", 					year-1, month);
+	String pp = String.format("<a href='calendar.jsp?year=%d&month=%d' style='text-decoration: none'>"
+							 + "  <img src='images/left.png' width='20px' height='20px'>"
+							+ "</a>", 					year-1, month); // a태그를 클릭하면 들어 갈 값
 	
 	// < month--
-	String p = String.format("<a href='calendar.jsp?year=%d&month=%d'>"
-							 + "  <img src='images/prec.gif' width='20px' height='20px'>"
+	String p = String.format("<a href='calendar.jsp?year=%d&month=%d' style='text-decoration: none'>"
+							 + "  <img src='images/prec.png' width='20px' height='20px'>"
 							+ "</a>", 					year, month-1);
 	
 	// > month++
-	String n = String.format("<a href='calendar.jsp?year=%d&month=%d'>"
-							 + "  <img src='images/next.gif' width='20px' height='20px'>"
+	String n = String.format("<a href='calendar.jsp?year=%d&month=%d' style='text-decoration: none'>"
+							 + "  <img src='images/next.png' width='20px' height='20px'>"
 							+ "</a>", 					year, month+1);
 	
 	// >> year++
-	String nn = String.format("<a href='calendar.jsp?year=%d&month=%d'>"
-			 				+ "  <img src='images/last.gif' width='20px' height='20px'>"
+	String nn = String.format("<a href='calendar.jsp?year=%d&month=%d' style='text-decoration: none'>"
+			 				+ "  <img src='images/last.png' width='20px' height='20px'>"
 						   + "</a>", 					year+1, month);
 	
 	// DB
@@ -95,17 +104,18 @@ a{
 	List<CalendarDto> list = dao.getCalendarList(login.getId(), year + CalendarUtil.two(month + ""));
 %>
 
+
 <div align="center">
 
-<table border="1">
-<col width="100"><col width="100"><col width="100"><col width="100">
-<col width="100"><col width="100"><col width="100">
+<table border="1" class="caltable">
+<col width="120"><col width="120"><col width="120"><col width="120">
+<col width="120"><col width="120"><col width="120">
 
-<tr>
+<tr height="80">
 	<td colspan="7" align="center">
 		<%=pp %>&nbsp;<%=p %>&nbsp;&nbsp;&nbsp;&nbsp;
 		
-		<font color="black" style="font-size: 50px;font-family: fantasy">
+		<font style="color:#3c3c3c;font-size: 40px;font-family: fantasy">
 			<%=String.format("%d년&nbsp;&nbsp;%2d월", year, month) %>
 		</font>
 		
@@ -113,14 +123,14 @@ a{
 	</td>
 </tr>
 
-<tr height="50" style="background-color: #0000ff; color: white;">
-	<th>일</th>
-	<th>월</th>
-	<th>화</th>
-	<th>수</th>
-	<th>목</th>
-	<th>금</th>
-	<th>토</th>
+<tr height="30" style="background-color: #000; color: white;">
+	<th>sun</th>
+	<th>mon</th>
+	<th>tus</th>
+	<th>wed</th>
+	<th>thu</th>
+	<th>fri</th>
+	<th>sat</th>
 </tr>
 
 <tr height="100" align="left" valign="top">
@@ -136,7 +146,7 @@ for(int i = 1;i < dayOfWeek; i++){
 int lastday = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 for(int i = 1;i <= lastday; i++){
 	%>
-	<td>	
+	<td style="color: #3c3c3c;padding-top: 5px">	
 		<%=CalendarUtil.callist(year, month, i) %>&nbsp;&nbsp;<%=CalendarUtil.calwrite(year, month, i) %>
 		<%=CalendarUtil.makeTable(year, month, i, list) %>
 	</td>
@@ -158,10 +168,9 @@ for(int i = 0;i < 7 - weekday; i++){
 }
 %>
 </tr>
-
 </table>
-
 </div>
+
 
 
 

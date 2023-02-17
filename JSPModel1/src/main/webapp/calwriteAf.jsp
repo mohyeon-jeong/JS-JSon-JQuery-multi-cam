@@ -12,6 +12,7 @@ String content = request.getParameter("content");
 
 String date = request.getParameter("date");
 String time = request.getParameter("time");
+System.out.println("time:" + time);
 
 // 2023-02-16
 // 15-14

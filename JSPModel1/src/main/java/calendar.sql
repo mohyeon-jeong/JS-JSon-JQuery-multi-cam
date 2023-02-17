@@ -26,9 +26,18 @@ from
 where rnum between 1 and 5;
 
 
+-- 202302181430 rdate
+-- 일별 일정
+select seq, id, title, content, rdate, wdate
+from calendar
+where id='abc' and substr(rdate, 1, 8)='20230218'
+order by rdate asc;
 
-
-
+-- 월별일정
+select seq, id, title, content, rdate, wdate
+from calendar
+where id='abc' and substr(rdate, 1, 6)='202302'
+order by rdate asc;
 
 
 

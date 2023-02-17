@@ -39,7 +39,7 @@
 <tr>
 	<th>패스워드</th>
 	<td>
-		<input type="password" name="pwd" size="20">
+		<input type="password" name="pwd" value="<%=123 %>" size="20">
 	</td>
 </tr>
 <tr>

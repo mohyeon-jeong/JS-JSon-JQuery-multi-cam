@@ -108,6 +108,157 @@ public class CalendarDao {
 		return count>0?true:false;
 	}
 	
+	public CalendarDto getDay(int seq) {
+		String sql = " select seq, id, title, content, rdate, wdate "
+				+ "    from calendar "
+				+ "    where seq=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		CalendarDto dto = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/3 getDay success");
+				
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("2/3 getDay success");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/3 getDay success");
+			
+			if(rs.next()){
+				dto = new CalendarDto();
+				
+				dto.setSeq(rs.getInt(1));
+				dto.setId(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setContent(rs.getString(4));
+				dto.setRdate(rs.getString(5));
+				dto.setWdate(rs.getString(6));
+			}
+		} catch (SQLException e) {
+			System.out.println("getDay fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, rs);
+		}
+		
+		return dto;
+	}
+	
+	public boolean updateCalendar(CalendarDto dto) {
+		
+		String sql = " update calendar "
+				+ "    set title=?, content=?, rdate=?, wdate=now() "
+				+ "    where seq=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/3 updateCalendar success");
+				
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getRdate());
+			psmt.setInt(4, dto.getSeq());
+			System.out.println("2/3 updateCalendar success");
+			
+			count = psmt.executeUpdate();
+			System.out.println("3/3 updateCalendar success");
+			
+		} catch (SQLException e) {
+			System.out.println("updateCalendar fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, null);
+		}
+		
+		return count>0?true:false;
+	}
+	
+	public boolean deleteCalendar(int seq) {
+		String sql = " delete from calendar "
+				+ "    where seq=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		int count = 0;
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/3 deleteCalendar success");
+				
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			System.out.println("2/3 deleteCalendar success");
+			
+			count = psmt.executeUpdate();
+			System.out.println("3/3 deleteCalendar success");
+			
+		} catch (SQLException e) {	
+			System.out.println("deleteCalendar fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, null);
+		}
+		
+		return count>0?true:false;
+	}
+	
+	public List<CalendarDto> getDayList(String id, String yyyymmdd) {
+		
+		String sql = " select seq, id, title, content, rdate, wdate "
+				+ "    from calendar "
+				+ "    where id=? and substr(rdate, 1, 8)=? "
+				+ "    order by rdate asc ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		List<CalendarDto> list = new ArrayList<CalendarDto>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("1/3 getDayList success");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setString(2, yyyymmdd);
+			System.out.println("2/3 getDayList success");
+			
+			rs = psmt.executeQuery();
+			System.out.println("3/3 getDayList success");
+			
+			while(rs.next()) {
+				int i = 1;
+				CalendarDto dto = new CalendarDto(	rs.getInt(i++), 
+													rs.getString(i++), 
+													rs.getString(i++), 
+													rs.getString(i++), 
+													rs.getString(i++), 
+													rs.getString(i++) );
+				list.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("getDayList fail");
+			e.printStackTrace();
+		} finally {
+			DBClose.close(conn, psmt, rs);			
+		}
+		
+		return list;
+	}
+	
 }
 
 

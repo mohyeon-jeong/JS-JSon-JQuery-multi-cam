@@ -82,7 +82,11 @@ let year = "<%=year %>";
 let month = "<%=month %>";
 let day = "<%=day %>";
 
-document.getElementById("date").value = year + "-" + month + "-" + day;
+document.getElementById("date").value = year + "-" + month + "-" + day; // 2023-02-16
+
+let date = new Date();
+document.getElementById("time").value = date.getHours() + ":" + date.getMinutes();
+
 
 </script>
 
